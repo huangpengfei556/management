@@ -18,10 +18,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
-        <!-- 布局功能的支持程序  thymeleaf3主程序  layout2以上版本 -->
-        <!-- thymeleaf2   layout1-->
-        <thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
+        <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+        <thymeleaf-layout-dialect.version>2.0.5</thymeleaf-layout-dialect.version>
     </properties>
    
    <dependencies>
@@ -94,6 +92,20 @@
             <version>2.9.2</version>
         </dependency>
         
+        <!--引入jquery-webjar-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+
+        <!--引入bootstrap-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        
         <!-- 热部署 -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -103,7 +115,10 @@
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-devtools</artifactId>
          </dependency>
-        
-        
+        <dependency>
+               <groupId>net.sourceforge.nekohtml</groupId>
+                <artifactId>nekohtml</artifactId>
+        </dependency>
    </dependencies>
+   
 </project>
