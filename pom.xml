@@ -114,11 +114,24 @@
         <dependency>
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-devtools</artifactId>
+                 <optional>true</optional>
          </dependency>
         <dependency>
                <groupId>net.sourceforge.nekohtml</groupId>
                 <artifactId>nekohtml</artifactId>
         </dependency>
    </dependencies>
+   <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
    
 </project>
