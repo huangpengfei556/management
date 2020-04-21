@@ -21,7 +21,7 @@ function loginRequest(username,password){
 			"username":username,
 			"password":password
 		},
-		success:function(data){
+		success:function(data){/*
 			console.log(data);
 			var d=[1,2,3,4]
 			var sumhtml="";
@@ -29,13 +29,8 @@ function loginRequest(username,password){
 				sumhtml+="<tr><td>"+i+"<td></tr>"
 			}
 		  $("#table").append(sumhtml);
-//			if(data.status=="1"){
-//				window.location.href="dashboard";
-//			}
-//			else{
-//				alert("登录失败");
-//			}
-		}
+
+		*/}
 		})
 //	$.ajax({
 //		url:"/user/login",
