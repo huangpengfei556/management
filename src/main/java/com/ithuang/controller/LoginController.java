@@ -1,5 +1,7 @@
 package com.ithuang.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +17,15 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	@ResponseBody
-	public Result login(@RequestBody UserInfo userInfo) {
+	public Result login(@RequestBody UserInfo userInfo, HttpServletRequest request) {
 		String passWord = userInfo.getPassWord();
 		String userName = userInfo.getUserName();
 		if ("admin".equals(passWord) && "admin".equals(userName)) {
+			request.getSession().setAttribute("loginUser", userName);
 			return Result.ok();
 		}
 		return Result.error("验证失败");
 	}
+
 }
+
