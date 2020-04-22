@@ -31,15 +31,17 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 				registry.addViewController("/").setViewName("login");
 				registry.addViewController("/index.html").setViewName("login");
 				registry.addViewController("/main.html").setViewName("index");
+				registry.addViewController("/register.html").setViewName("register");
 			}
 
 			// 注册拦截器
 			@Override
 			public void addInterceptors(InterceptorRegistry registry) {
-			  //super.addInterceptors(registry); //静态资源； *.css , *.js
+				//super.addInterceptors(registry); //静态资源； *.css , *.js
 				// SpringBoot已经做好了静态资源映射
 				registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-			  .excludePathPatterns("/index.html", "/", "/user/login"); }
+						.excludePathPatterns("/index.html", "/", "/user/login", "/register.html");
+			}
 		};
 		return adapter;
 	}

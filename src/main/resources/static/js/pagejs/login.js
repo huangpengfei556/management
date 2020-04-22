@@ -38,3 +38,7 @@ function checkAuth(username,password) {
        }
     });
 }
+
+function register(){
+	window.location.href = "/register.html";
+}

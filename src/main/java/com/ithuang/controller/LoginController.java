@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ithuang.common.Result;
 import com.ithuang.entities.dto.UserInfo;
 
-
 @Controller
 @RequestMapping("/user")
 public class LoginController {
-	
+
 	@RequestMapping("/login")
 	@ResponseBody
 	public Result login(@RequestBody UserInfo userInfo, HttpServletRequest request) {
@@ -27,5 +26,10 @@ public class LoginController {
 		return Result.error("验证失败");
 	}
 
+	@RequestMapping("/logout")
+	@ResponseBody
+	public Result logout(HttpServletRequest request) {
+		request.getSession().removeAttribute("loginUser");
+		return Result.ok();
+	}
 }
-
