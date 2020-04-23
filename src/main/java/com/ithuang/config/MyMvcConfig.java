@@ -40,7 +40,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 				//super.addInterceptors(registry); //静态资源； *.css , *.js
 				// SpringBoot已经做好了静态资源映射
 				registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-						.excludePathPatterns("/index.html", "/", "/user/login", "/register.html");
+						.excludePathPatterns("/index.html", "/", "/user/login", "/register.html", "/user/register",
+								"/user/verifyCode");
 			}
 		};
 		return adapter;
@@ -50,4 +51,5 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 	public LocaleResolver localeResolver() {
 		return new MyLocaleResolver();
 	}
+
 }

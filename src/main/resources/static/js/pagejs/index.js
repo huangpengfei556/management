@@ -1,4 +1,4 @@
-$(function(){
+window.onload=function(){
 	$.ajax({
 		"url":"/index/columns",
 		"type":"POST",
@@ -16,5 +16,4 @@ $(function(){
 			alert("初始化失败");
 		}
 	})
-
-})
+}

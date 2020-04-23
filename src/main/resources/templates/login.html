@@ -14,7 +14,7 @@
 			<legend th:text="#{login.tip}">后台管理系统</legend>
 			<p>
 				<label><img alt="图片" th:src="@{/img/bootstrapsolid.svg}"
-					src="img/bootstrapsolid.svg" alt="" width="72" height="72" /></label>
+					src="img/bootstrapsolid.svg" width="72" height="72" /></label>
 			</p>
 			<p style="color: red" th:text="${msg}"
 				th:if="${not #strings.isEmpty(msg)}"></p>
@@ -26,17 +26,20 @@
 				<label th:text="#{login.password}">密&nbsp;&nbsp;&nbsp;码</label>： <input
 					type="text" id="password" />
 			</p>
+            <p>
+                <label>验证码<img alt="验证码" id="verifyCode" src="" width="72" height="72" /></label>
+            </p>
 			<p>
-				<label class="checkbox"><input type="checkbox"
-					th:text="#{login.save}" /></label> <label class="checkbox"><input
-					type="checkbox" th:text="#{login.autologin}" /></label>
+				<label class="checkbox"><input type="checkbox" id="remember" onclick="remember()"
+					th:text="#{login.save}" /><input type="hidden" id="remFlag" value=0 /></label> 
+                    
+                <label class="checkbox"><input
+					type="checkbox" th:text="#{login.autologin}"/></label>
 			</p>
 			<p>
 				<button class="btn" type="submit" onclick="checkUser()"
 					th:text="#{login.btn}">登录</button>
-			</p>
-			<p>
-				<button class="btn" type="submit" onclick="register()"
+				<button class="btn" type="submit" onclick="registerPage()"
                     th:text="#{login.register}">注册？</button>
 			</p>
 			<p class="mt-5 mb-3 text-muted">© 2019-2020</p>

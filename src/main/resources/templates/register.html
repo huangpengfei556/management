@@ -5,7 +5,7 @@
 <title>后台管理平台</title>
 <meta name="description" content="若依后台管理框架">
 <link href="../static/css/login.css" th:href="@{/css/login.css}" rel="stylesheet" />
-<script src="../static/js/pagejs/login.js" th:src="@{/js/pagejs/login.js}" type="text/javascript"></script>
+<script src="../static/js/pagejs/register.js" th:src="@{/js/pagejs/register.js}" type="text/javascript"></script>
 <script src="../static/js/jquery-2.1.0.min.js" th:src="@{/js/jquery-2.1.0.min.js}" type="text/javascript"></script>
 </head>
 <body>
@@ -22,8 +22,10 @@
 					type="text" id="password" />
 			</p>
 			<p>
-				<button class="btn" type="submit" onclick="checkUser()"
+				<button class="btn" type="submit" onclick="check()"
 					th:text="#{register.btn}">注册</button>
+				<button class="btn" type="submit" onclick="loginPage()"
+					th:text="#{register.login}">登录？</button>
 			</p>
 			<p class="mt-5 mb-3 text-muted">© 2019-2020</p>
 			<a class="btn btn-sm" th:href="@{/register.html(l='zh_CN')}">中文</a> <a
