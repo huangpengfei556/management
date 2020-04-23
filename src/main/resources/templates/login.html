@@ -26,8 +26,10 @@
 				<label th:text="#{login.password}">密&nbsp;&nbsp;&nbsp;码</label>： <input
 					type="text" id="password" />
 			</p>
+			<p><label>看不清？点击刷新 <img alt="验证码" id="verifyCode" src="" width="90" height="20" onclick="verifyCode()"/></label>
+			</p>
             <p>
-                <label>验证码<img alt="验证码" id="verifyCode" src="" width="72" height="72" /></label>
+                <label>验证码 ： <input type="text" id="code" /></label>
             </p>
 			<p>
 				<label class="checkbox"><input type="checkbox" id="remember" onclick="remember()"

@@ -1,16 +1,13 @@
 package com.ithuang.controller;
 
 import java.awt.image.RenderedImage;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ithuang.common.ManagerException;
 import com.ithuang.common.Result;
 import com.ithuang.entities.dto.UserInfo;
 import com.ithuang.service.UserService;
@@ -35,13 +33,16 @@ public class LoginController {
 	public Result login(@RequestBody UserInfo userInfo, HttpServletRequest request) {
 		String passWord = userInfo.getPassWord();
 		String userName = userInfo.getUserName();
-		boolean authUser = userService.authUser(userName, passWord);
-		if (authUser) {
-			request.getSession().setAttribute("loginUser", userInfo);
-			return Result.ok();
-		} else {
-			return Result.error("验证失败");
+		String verifyCode = request.getSession().getAttribute("VerifyCode").toString();
+		if (!userInfo.getCode().equals(verifyCode)) {
+			throw new ManagerException("验证码错误");
 		}
+		boolean authUser = userService.authUser(userName, passWord);
+		if (!authUser) {
+			throw new ManagerException("用户名或者密码错误");
+		}
+		request.getSession().setAttribute("loginUser", userInfo);
+		return Result.ok();
 	}
 
 	@RequestMapping("/logout")
@@ -60,21 +61,25 @@ public class LoginController {
 
 	@RequestMapping("/verifyCode")
 	@ResponseBody
-	public Result verifyCode() {
-		String fileName = UUID.randomUUID().toString() + ".jpg";
+	public Result verifyCode(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> map = CodeUtil.generateCodeAndPic();
-		try (OutputStream out = new FileOutputStream("src\\main\\resources\\static\\verifyCode\\" + fileName)) {
-			ImageIO.write((RenderedImage) map.get("codePic"), "jpeg", out);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		//将VerifyCode绑定session
+		request.getSession().setAttribute("VerifyCode", map.get("code"));
+		//设置响应头
+		response.setHeader("Pragma", "no-cache");
+		//设置响应头
+		response.setHeader("Cache-Control", "no-cache");
+		//在代理服务器端防止缓冲
+		response.setDateHeader("Expires", 0);
+		//设置响应内容类型
+		response.setContentType("image/jpeg");
+		try {
+			ServletOutputStream outputStream = response.getOutputStream();
+			ImageIO.write((RenderedImage) map.get("codePic"), "jpeg", outputStream);
+			outputStream.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Map<String, String> res = new HashMap<String, String>();
-		// 存放验证码
-		res.put("code", map.get("code").toString());
-		// 存放生成的验证码BufferedImage对象
-		res.put("fileName", fileName);
-		return Result.ok().put(res);
+		return Result.ok();
 	}
 }

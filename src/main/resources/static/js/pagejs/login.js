@@ -1,25 +1,22 @@
-window.onload=function(){
-	$.ajax({
-		url:"/user/verifyCode",
-		type:"POST",
-		async:true,
-		timeout:6000,
-		success:function(data){
-			if(data.code==200){
-	           console.log(data.data.fileName);
-	           var file = "verifyCode/"+data.data.fileName;
-	           console.log(file);		//	verifyCode//f8cfb134-573a-4bfd-b41f-ec97113ab87a.jpg
-	           $("#verifyCode").attr("src",file);
-			}else{
-				alert("验证码创建失败");
-			}
-		},
-		error:function(){
-			alert("初始化失败");
-		}
-	})
+var url = "http://localhost:8000/user/verifyCode";
 
+window.onload=function(){
+	verifyCode()
 }
+
+function verifyCode(){
+	document.getElementById("verifyCode").src = timestamp(url);
+}
+
+function timestamp(url) {
+    var getTimestamp = new Date().getTime();
+    if (url.indexOf("?") > -1) {
+        url = url + "&timestamp=" + getTimestamp
+    } else {
+        url = url + "?timestamp=" + getTimestamp
+    }
+    return url;
+};
 
 function remember(){
 	var remFlag = $("#remember").is(':checked');
@@ -33,6 +30,7 @@ function remember(){
 function checkUser(){
 	var username=$("#username").val();
 	var password=$("#password").val();
+	var code=$("#code").val();
 	var remFlag=$("#remFlag").val();
 	if(username == "" ){
 		alert("用户名不能为空");
@@ -42,12 +40,12 @@ function checkUser(){
 		alert("密码不能为空");
 		return false;
 	}else{
-		checkAuth(username,password,remFlag);
+		checkAuth(username,password,code,remFlag);
 	}
 }
 
-function checkAuth(username,password,remFlag) {
-	var user = {"userName":username,"passWord":password,"remFlag":remFlag};
+function checkAuth(username,password,code,remFlag) {
+	var user = {"userName":username,"passWord":password,"code":code,"remFlag":remFlag};
 	var userInfo = JSON.stringify(user);
 	$.ajax({
 		url:"/user/login",

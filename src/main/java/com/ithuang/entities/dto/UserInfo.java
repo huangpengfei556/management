@@ -10,4 +10,6 @@ public class UserInfo {
 	private String passWord;
 
 	private Integer remFlag;
+
+	private String code;
 }
