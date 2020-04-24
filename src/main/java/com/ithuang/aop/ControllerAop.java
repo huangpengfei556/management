@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 @Component
 @Slf4j
-public class ControllerAop {
+public class ControllerAop{
 
 	@Pointcut("execution(* com.ithuang.controller..*.*(..))")
 	public void executePackage() {
