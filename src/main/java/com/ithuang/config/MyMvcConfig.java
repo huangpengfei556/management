@@ -29,9 +29,12 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 			@Override
 			public void addViewControllers(ViewControllerRegistry registry) {
 				registry.addViewController("/").setViewName("login");
-				registry.addViewController("/index.html").setViewName("login");
-				registry.addViewController("/main.html").setViewName("index");
+				registry.addViewController("/login.html").setViewName("login");
+				registry.addViewController("/index.html").setViewName("index");
 				registry.addViewController("/register.html").setViewName("register");
+				registry.addViewController("/page/indexOne.html").setViewName("/page/indexOne");
+				registry.addViewController("/page/indexTwo.html").setViewName("/page/indexTwo");
+				registry.addViewController("/page/indexThree.html").setViewName("/page/indexThree");
 			}
 
 			// 注册拦截器
@@ -40,8 +43,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 				//super.addInterceptors(registry); //静态资源； *.css , *.js
 				// SpringBoot已经做好了静态资源映射
 				registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-						.excludePathPatterns("/index.html", "/", "/user/login", "/register.html", "/user/register",
-								"/user/verifyCode");
+						.excludePathPatterns("/login.html", "/register.html", "/", "/user/*");
 			}
 		};
 		return adapter;

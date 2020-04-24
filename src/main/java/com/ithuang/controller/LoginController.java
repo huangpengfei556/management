@@ -34,9 +34,10 @@ public class LoginController {
 		String passWord = userInfo.getPassWord();
 		String userName = userInfo.getUserName();
 		String verifyCode = request.getSession().getAttribute("VerifyCode").toString();
-		if (!userInfo.getCode().equals(verifyCode)) {
-			throw new ManagerException("验证码错误");
-		}
+		/*
+		 * if (!userInfo.getCode().equals(verifyCode)) { throw new
+		 * ManagerException("验证码错误"); }
+		 */
 		boolean authUser = userService.authUser(userName, passWord);
 		if (!authUser) {
 			throw new ManagerException("用户名或者密码错误");

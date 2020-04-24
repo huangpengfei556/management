@@ -1,11 +1,9 @@
-var url = "http://localhost:8000/user/verifyCode";
-
 window.onload=function(){
 	verifyCode()
 }
 
 function verifyCode(){
-	document.getElementById("verifyCode").src = timestamp(url);
+	document.getElementById("verifyCode").src = timestamp("/user/verifyCode");
 }
 
 function timestamp(url) {
@@ -55,7 +53,7 @@ function checkAuth(username,password,code,remFlag) {
 		contentType:'application/json',
 		success:function(data){
 			if(data.code==200){
-				window.location.href = "/main.html";
+				window.location.href = "/index.html";
 			}else{
 				alert("验证错误");
 			}
