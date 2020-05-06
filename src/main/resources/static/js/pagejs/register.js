@@ -1,3 +1,27 @@
+window.onload=function(){
+	$("#username").blur(function(){
+		var username = $("#username").val();
+		$.ajax({
+			url:"/user/registerCheck",
+		    type:"POST",
+	        async:false,
+	        data:"userName="+username,
+	        dataType:"json",
+	        success: function(data){
+	        	var msg;
+	        	if(data.code==200){
+	        		$("#lab").html("用户名可以用");
+	        		$("#lab").addClass("green");
+	     	   }else{
+	     		  $("#lab").html("用户名不可用");
+	     		 $("#lab").addClass("red");
+	     	   }
+	        }
+		})
+	})
+}
+
+
 function check(){
 	var username = $("#username").val();
 	var password = $("#password").val();
@@ -25,9 +49,9 @@ function register(username,password){
        success:function(data){
     	   if(data.code==200){
     		   alert("注册成功");
-    		   window.location.href = "/index.html";
+    		   window.location.href = "/login.html";
     	   }else{
-    		   alert("验证错误");
+    		   alert(data.msg);
     	   }
        },
        error:function(){
@@ -37,5 +61,5 @@ function register(username,password){
 }
 
 function loginPage(){
-	window.location.href = "/index.html";
+	window.location.href = "/login.html";
 }

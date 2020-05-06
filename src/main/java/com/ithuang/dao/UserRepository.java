@@ -28,4 +28,7 @@ public interface UserRepository
 	@Query("from UserEO where userName = :userName and passWord=:passWord")
 	List<UserEO> queryByUserNameAndPassword(@Param("userName") String userName, @Param("passWord") String passWord);
 
+	@Query("from UserEO where userName = :userName")
+	List<UserEO> queryByUserName(@Param("userName") String userName);
+
 }

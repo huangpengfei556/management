@@ -11,27 +11,14 @@ function logout(){
 
 $(function () {
 	var id = GetQueryString("id");
-	if(id==0){
-		$("#0").addClass("active");
+	$("#0").addClass("active");
+	if(id!=0 && id!=null){
+		$("#0").removeClass("active");
 	}
 	initnavmenu();
 	$("#main").on('click',"li",function(){
 		var count=$(this).index();
 		var id=$(this).attr("id");
-		/*if(id==0){
-			window.location.href = "/index.html?id="+id;
-		}
-		if(id==1){
-			window.location.href = "/page/indexOne.html?id="+id;
-		}
-		if(id==2){
-			window.location.href = "/page/indexTwo.html?id="+id;
-		}
-		if(id==3){
-			window.location.href = "/page/indexThree.html?id="+id;
-		}*/
-
-
 	})
 })
 

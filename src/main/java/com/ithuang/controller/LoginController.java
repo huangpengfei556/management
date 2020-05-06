@@ -55,8 +55,20 @@ public class LoginController {
 
 	@RequestMapping("/register")
 	@ResponseBody
-	public Result register(@RequestBody UserInfo userInfo, HttpServletRequest request) {
+	public Result register(@RequestBody UserInfo userInfo) {
+		if (userService.getUserName(userInfo.getUserName())) {
+			throw new ManagerException("用户名已经存在");
+		}
 		userService.insertUser(userInfo.getUserName(), userInfo.getPassWord());
+		return Result.ok();
+	}
+
+	@RequestMapping("/registerCheck")
+	@ResponseBody
+	public Result registerCheck(String userName) {
+		if (userService.getUserName(userName)) {
+			return Result.error("用户名已经存在");
+		}
 		return Result.ok();
 	}
 

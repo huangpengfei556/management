@@ -31,4 +31,14 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 	}
+
+	@Override
+	public boolean getUserName(String userName) {
+		List<UserEO> list = userRepository.queryByUserName(userName);
+		if (list.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

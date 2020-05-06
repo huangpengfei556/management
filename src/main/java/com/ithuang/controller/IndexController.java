@@ -22,15 +22,15 @@ public class IndexController {
 		ColumnVO c1 = new ColumnVO();
 		c1.setId(1);
 		c1.setName("个人账单管理");
-		c1.setHref("/page/indexOne.html");
+		c1.setHref("/page/personalOrder.html");
 		ColumnVO c2 = new ColumnVO();
 		c2.setId(2);
 		c2.setName("账单类型管理");
-		c2.setHref("/page/indexTwo.html");
+		c2.setHref("/page/orderType.html");
 		ColumnVO c3 = new ColumnVO();
 		c3.setId(3);
 		c3.setName("统计分析");
-		c3.setHref("/page/indexThree.html");
+		c3.setHref("/page/statistical.html");
 		list.add(c1);
 		list.add(c2);
 		list.add(c3);

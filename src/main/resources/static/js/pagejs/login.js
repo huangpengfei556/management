@@ -55,7 +55,7 @@ function checkAuth(username,password,code,remFlag) {
 			if(data.code==200){
 				window.location.href = "/index.html";
 			}else{
-				alert("验证错误");
+				alert(data.msg);
 			}
 		},
 		error:function(){
